@@ -1,4 +1,4 @@
-package com.skill.distillery.cards.common;
+package com.skilldistillery.cards.common;
 
 import java.util.ArrayList;
 import java.util.Collections;
