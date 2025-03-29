@@ -188,8 +188,6 @@ public class BlackjackApplication {
 				Card drawnCard = dealer.dealCard();
 				player.hit(drawnCard);
 				System.out.println(drawnCard);
-				playerHandValue();
-				player.getHandValue();
 				if (player.getHandValue() > 21) {
 					System.out.println("BUSTED!");
 					keepPlaying = false;
