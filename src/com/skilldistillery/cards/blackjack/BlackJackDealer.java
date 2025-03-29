@@ -14,6 +14,11 @@ public class BlackjackDealer extends BlackjackPlayer{
 		deck = new Deck();
 	}
 	
+	public void newDeck() {
+		deck = new Deck();
+		shuffleDeck();
+	}
+	
 	public int getCurrentDeckSize() {
 		return deck.checkCurrentDeckSize();
 	}
