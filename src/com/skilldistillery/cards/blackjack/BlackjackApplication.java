@@ -39,18 +39,29 @@ public class BlackjackApplication {
 			} else {
 				playGame();
 			}
-			if (dealer.getCurrentDeckSize() <= 9) {
-				System.out.println("_____________________________");
-				System.out.println("There aren't enough cards in the deck to play again!");
-				System.out.println("Would you like to shuffle and play again?");
-				String playAgain = sc.next();
-				switch (playAgain) {
-				case "Yes": case "yes": case "y": case "Y":
-					dealer.newDeck();
-					break;
-				case "No": case "no": case "N": case "n":
-					System.out.println("Have a great day!");
-				}
+			checkDeckSize();
+		}
+	}
+
+	// CHECK DECK SIZE AND SHUFFLE IF USER WANTS TO PLAY AGAIN
+	public void checkDeckSize() {
+		if (dealer.getCurrentDeckSize() <= 9) {
+			System.out.println("_____________________________");
+			System.out.println("There aren't enough cards in the deck to play again!");
+			System.out.println("Would you like to shuffle and play again?");
+			String playAgain = sc.next();
+			switch (playAgain) {
+			case "Yes":
+			case "yes":
+			case "y":
+			case "Y":
+				dealer.newDeck();
+				break;
+			case "No":
+			case "no":
+			case "N":
+			case "n":
+				System.out.println("Have a great day!");
 			}
 		}
 	}
