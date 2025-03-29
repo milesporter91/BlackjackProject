@@ -22,5 +22,9 @@ public class BlackjackPlayer {
 	public void printHand() {
 		hand.printCardsInHand();
 	}
+	
+	public void clearHand() {
+		hand.clear();
+	}
 
 }

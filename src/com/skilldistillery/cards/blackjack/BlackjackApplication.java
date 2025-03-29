@@ -28,29 +28,38 @@ public class BlackjackApplication {
 	private void launch() {
 
 		dealer.shuffleDeck();
-		System.out.println("Welcome to Blackjack! Dealing starting hands: ");
-		System.out.println("Lets play!");
-		dealStartingHands();
-		checkStartingHands();
-		if (startingHandEndsGame) {
-			System.out.println("Game over!");
-		} else {
-			printPlayerHand();
-			playerTurn();
-			printPlayerHand();
-			printDealerHand();
-			if (player.getHandValue() < 22) {
-				dealerTurn();
+		System.out.println("Welcome to Blackjack! \nLet's play!");
+		while (dealer.getCurrentDeckSize() > 6) {
+			player.clearHand();
+			dealer.clearHand();
+			dealStartingHands();
+			checkStartingHands();
+			if (startingHandEndsGame) {
+				System.out.println("Game over!");
+			} else {
+				playGame();
+				if (dealer.getCurrentDeckSize() > 6) {
+					System.out.println("There aren't enough cards in the deck to play again!");
+				}
 			}
-			playerHandValue();
-			dealerHandValue();
-			determineWinner();
-			// THIS IS WHERE THE HIT/STAY LOOP WILL GO WITH CONDITIONALS FOR BUSTING OR
-			// WINNING THE HAND //
 		}
 	}
 
-	//STARTING HANDS METHODS
+	// PLAY GAME
+	public void playGame() {
+		printPlayerHand();
+		playerTurn();
+		printPlayerHand();
+		printDealerHand();
+		if (player.getHandValue() < 22) {
+			dealerTurn();
+		}
+		playerHandValue();
+		dealerHandValue();
+		determineWinner();
+	}
+
+	// STARTING HANDS METHODS
 	public void checkStartingHands() {
 		if (player.getHandValue() > 21) {
 			printPlayerHand();
@@ -138,7 +147,7 @@ public class BlackjackApplication {
 	}
 
 	// PRINT HANDS METHODS
-	
+
 	public void dealerHandValue() {
 		System.out.println("Dealer has " + dealer.getHandValue());
 	}
@@ -146,7 +155,7 @@ public class BlackjackApplication {
 	public void playerHandValue() {
 		System.out.println("Player has " + player.getHandValue());
 	}
-	
+
 	public void printDealerHand() {
 		System.out.print("Dealer Hand: ");
 		dealer.printHand();
@@ -157,7 +166,7 @@ public class BlackjackApplication {
 		player.printHand();
 	}
 
-	//TURN METHODS
+	// TURN METHODS
 	public void dealerTurn() {
 		while (dealer.getHandValue() < 17) {
 			Card drawnCard = dealer.dealCard();
@@ -209,7 +218,7 @@ public class BlackjackApplication {
 		}
 	}
 
-	//DETERMINE WINNER METHOD
+	// DETERMINE WINNER METHOD
 	public void determineWinner() {
 		if ((player.getHandValue() > dealer.getHandValue() && player.getHandValue() < 22)
 				|| (player.getHandValue() < 22 && dealer.getHandValue() > 21)) {
@@ -222,8 +231,12 @@ public class BlackjackApplication {
 
 	}
 
-	//DEAL STARTING HANDS METHOD
+	// DEAL STARTING HANDS METHOD
 	public void dealStartingHands() {
+		System.out.println("________________________________\n");
+		System.out.println("Cards left in deck: " + dealer.getCurrentDeckSize());
+		System.out.println("Dealing New Hand!");
+		System.out.println("________________________________");
 		Card drawnCard = dealer.dealCard();
 		player.hit(drawnCard);
 		System.out.println("Player's first Card: " + drawnCard);
