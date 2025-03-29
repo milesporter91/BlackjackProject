@@ -31,8 +31,4 @@ public class BlackjackDealer extends BlackjackPlayer{
 		deck.shuffleDeck();
 	}
 	
-	public void dealStartingCards() {
-		
-	}
-		
 }

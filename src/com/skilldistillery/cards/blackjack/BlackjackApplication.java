@@ -27,33 +27,8 @@ public class BlackjackApplication {
 	// LAUNCH METHOD
 	private void launch() {
 		playGame();
-		}
-	
-
-	// CHECK DECK SIZE AND SHUFFLE IF USER WANTS TO PLAY AGAIN
-	public void checkDeckSize() {
-		if (dealer.getCurrentDeckSize() <= 9) {
-			System.out.println("_____________________________");
-			System.out.println("There aren't enough cards in the deck to play again!");
-			System.out.println("Would you like to shuffle and play again?");
-			String playAgain = sc.next();
-			switch (playAgain) {
-			case "Yes":
-			case "yes":
-			case "y":
-			case "Y":
-				dealer.newDeck();
-				break;
-			case "No":
-			case "no":
-			case "N":
-			case "n":
-				System.out.println("Have a great day!");
-			}
-		}
 	}
 
-	
 	// PLAY GAME
 	public void playGame() {
 		dealer.shuffleDeck();
@@ -62,31 +37,29 @@ public class BlackjackApplication {
 			dealAndCheckHands();
 			if (startingHandEndsGame) {
 				System.out.println("Game over!");
+			} else {
+				takeTurns();
 			}
-			else {
-		takeTurns();
-		checkDeckSize();
-			}
+			checkIfShuffleNeeded();
+		}
 	}
-	}
-	
+
 	public void takeTurns() {
-		printPlayerHand();
 		playerTurn();
 		if (player.getHandValue() < 22) {
 			dealerTurn();
 		}
 		determineWinner();
 	}
-	
+
 	// STARTING HANDS METHODS
-	
+
 	public void dealAndCheckHands() {
-		player.clearHand();
-		dealer.clearHand();
+//		dealFixedHands();
 		dealStartingHands();
 		checkStartingHands();
 	}
+
 	public void checkStartingHands() {
 		if (player.getHandValue() > 21) {
 			printPlayerHand();
@@ -111,10 +84,6 @@ public class BlackjackApplication {
 				printPlayerHand();
 				printDealerHand();
 				System.out.println("Dealer and Player both got Blackjack! Tie hand!");
-				startingHandEndsGame = true;
-			} else if (player.getHandValue() > 21) {
-				printPlayerHand();
-				userTrollBust();
 				startingHandEndsGame = true;
 			} else {
 				startingHandEndsGame = false;
@@ -209,6 +178,7 @@ public class BlackjackApplication {
 	}
 
 	public void playerTurn() {
+		printPlayerHand();
 		String hitOrStay;
 		boolean keepPlaying = true;
 		while (keepPlaying) {
@@ -267,6 +237,8 @@ public class BlackjackApplication {
 		System.out.println("Cards left in deck: " + dealer.getCurrentDeckSize());
 		System.out.println("Dealing New Hand!");
 		System.out.println("________________________________");
+		player.clearHand();
+		dealer.clearHand();
 		Card drawnCard = dealer.dealCard();
 		player.hit(drawnCard);
 		System.out.println("Player's first Card: " + drawnCard);
@@ -280,5 +252,40 @@ public class BlackjackApplication {
 		dealer.hit(drawnCard);
 		System.out.println("Dealer's second Card: " + drawnCard);
 	}
+
+	// CHECK DECK SIZE AND SHUFFLE IF USER WANTS TO PLAY AGAIN
+	public void checkIfShuffleNeeded() {
+		if (dealer.getCurrentDeckSize() <= 9) {
+			System.out.println("_____________________________");
+			System.out.println("There aren't enough cards in the deck to play again!");
+			System.out.println("Would you like to shuffle and play again?");
+			String playAgain = sc.next();
+			switch (playAgain) {
+			case "Yes":
+			case "yes":
+			case "y":
+			case "Y":
+				dealer.newDeck();
+				break;
+			case "No":
+			case "no":
+			case "N":
+			case "n":
+				System.out.println("Have a great day!");
+			}
+		}
+	}
+
+//	public void dealFixedHands() {
+//		dealer.clearHand();
+//		player.clearHand();
+//		dealer.hit(new Card(Rank.ACE, Suit.CLUBS));
+//		dealer.hit(new Card(Rank.KING, Suit.CLUBS));
+//		player.hit(new Card(Rank.ACE, Suit.CLUBS));
+//		player.hit(new Card(Rank.FIVE, Suit.CLUBS));
+//		for (int i = 0; i < 42; i++) {
+//			dealer.dealCard();
+//		}
+//	}
 
 }
