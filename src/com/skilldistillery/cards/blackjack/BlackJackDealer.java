@@ -17,5 +17,13 @@ public class BlackjackDealer extends BlackjackPlayer{
 	public Card dealCard() {
 		return deck.dealCard();
 	}
+	
+	public void shuffleDeck() {
+		deck.shuffleDeck();
+	}
+	
+	public void dealStartingCards() {
+		
+	}
 		
 }

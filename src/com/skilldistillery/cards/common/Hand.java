@@ -11,6 +11,7 @@ public abstract class Hand {
 		cardsInHand = new ArrayList<>();
 	}
 	
+	
 	public void addCard(Card card) {
 		cardsInHand.add(card);
 	}
@@ -21,10 +22,14 @@ public abstract class Hand {
 	
 	public abstract int getHandValue();
 
-	@Override
-	public String toString() {
-		return "Hand [cardsInHand=" + cardsInHand + "]";
+	public String printCardsInHand() {
+		String playerCards = "";
+		for (int i = 0; i < cardsInHand.size(); i++) {
+			playerCards = cardsInHand.get(i) + " ";
+		}
+		return playerCards;
 	}
+	
 	
 	
 	

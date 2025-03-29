@@ -13,7 +13,14 @@ public class BlackjackPlayer {
 	
 	public void hit(Card card) {
 		this.hand.addCard(card);
-		
+	}
+
+	public int getHandValue() {
+		return hand.getHandValue();
+	}
+	
+	public void printHand() {
+		hand.printCardsInHand();
 	}
 
 }
