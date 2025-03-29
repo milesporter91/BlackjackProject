@@ -22,12 +22,13 @@ public abstract class Hand {
 	
 	public abstract int getHandValue();
 
-	public String printCardsInHand() {
+	public void printCardsInHand() {
 		String playerCards = "";
 		for (int i = 0; i < cardsInHand.size(); i++) {
-			playerCards = cardsInHand.get(i) + " ";
+			boolean moreCards = (i == cardsInHand.size() -1);
+			playerCards = playerCards + cardsInHand.get(i)  + (moreCards ? "." : ", ");
 		}
-		return playerCards;
+		System.out.println(playerCards);
 	}
 	
 	

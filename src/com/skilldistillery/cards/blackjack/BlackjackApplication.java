@@ -35,8 +35,10 @@ public class BlackjackApplication {
 		if (startingHandEndsGame) {
 			System.out.println("Game over!");
 		} else {
+			printPlayerHand();
 			playerTurn();
-			dealer.printHand();
+			printPlayerHand();
+			printDealerHand();
 			if (player.getHandValue() < 22) {
 				dealerTurn();
 			}
@@ -50,15 +52,21 @@ public class BlackjackApplication {
 
 	public void checkStartingHands() {
 		if (player.getHandValue() == 21 && dealer.getHandValue() != 21) {
+			printPlayerHand();
 			System.out.println("WINNER WINNER CHICKEN DINNER!");
 			startingHandEndsGame = true;
 		} else if (player.getHandValue() != 21 && dealer.getHandValue() == 21) {
+			printPlayerHand();
+			printDealerHand();
 			System.out.println("Dealer Blackjack!");
 			startingHandEndsGame = true;
 		} else if (player.getHandValue() == 21 && dealer.getHandValue() == 21) {
+			printPlayerHand();
+			printDealerHand();
 			System.out.println("Dealer and Player both got Blackjack! Tie hand!");
 			startingHandEndsGame = true;
 		} else if (player.getHandValue() > 21) {
+			printPlayerHand();
 			System.out.println("You busted!");
 			System.out.println(
 					"...okay not really playing by the rules, but Aces only equal 11 here....sorry bout your luck.");
@@ -68,8 +76,17 @@ public class BlackjackApplication {
 		}
 	}
 
-	public void dealerTurn() {
+	public void printDealerHand() {
+		System.out.print("Dealer Hand: ");
 		dealer.printHand();
+	}
+	
+	public void printPlayerHand() {
+		System.out.print("Player Hand: ");
+		player.printHand();
+	}
+	
+	public void dealerTurn() {
 		while (dealer.getHandValue() < 17) {
 			Card drawnCard = dealer.dealCard();
 			dealer.hit(drawnCard);
@@ -99,6 +116,7 @@ public class BlackjackApplication {
 				Card drawnCard = dealer.dealCard();
 				player.hit(drawnCard);
 				System.out.println(drawnCard);
+				player.getHandValue();
 				if (player.getHandValue() > 21) {
 					System.out.println("BUSTED!");
 					keepPlaying = false;
