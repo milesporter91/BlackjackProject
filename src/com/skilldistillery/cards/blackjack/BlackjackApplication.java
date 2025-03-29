@@ -26,22 +26,9 @@ public class BlackjackApplication {
 
 	// LAUNCH METHOD
 	private void launch() {
-
-		dealer.shuffleDeck();
-		System.out.println("Welcome to Blackjack! \nLet's play!");
-		while (dealer.getCurrentDeckSize() > 9) {
-			player.clearHand();
-			dealer.clearHand();
-			dealStartingHands();
-			checkStartingHands();
-			if (startingHandEndsGame) {
-				System.out.println("Game over!");
-			} else {
-				playGame();
-			}
-			checkDeckSize();
+		playGame();
 		}
-	}
+	
 
 	// CHECK DECK SIZE AND SHUFFLE IF USER WANTS TO PLAY AGAIN
 	public void checkDeckSize() {
@@ -66,21 +53,40 @@ public class BlackjackApplication {
 		}
 	}
 
+	
 	// PLAY GAME
 	public void playGame() {
+		dealer.shuffleDeck();
+		System.out.println("Welcome to Blackjack! \nLet's play!");
+		while (dealer.getCurrentDeckSize() > 9) {
+			dealAndCheckHands();
+			if (startingHandEndsGame) {
+				System.out.println("Game over!");
+			}
+			else {
+		takeTurns();
+		checkDeckSize();
+			}
+	}
+	}
+	
+	public void takeTurns() {
 		printPlayerHand();
 		playerTurn();
-		printPlayerHand();
-		printDealerHand();
 		if (player.getHandValue() < 22) {
 			dealerTurn();
 		}
-		playerHandValue();
-		dealerHandValue();
 		determineWinner();
 	}
-
+	
 	// STARTING HANDS METHODS
+	
+	public void dealAndCheckHands() {
+		player.clearHand();
+		dealer.clearHand();
+		dealStartingHands();
+		checkStartingHands();
+	}
 	public void checkStartingHands() {
 		if (player.getHandValue() > 21) {
 			printPlayerHand();
@@ -193,7 +199,6 @@ public class BlackjackApplication {
 			Card drawnCard = dealer.dealCard();
 			dealer.hit(drawnCard);
 			System.out.println("Dealer hits: " + drawnCard);
-			dealerHandValue();
 			if (dealer.getHandValue() > 21) {
 				System.out.println("Dealer busts!");
 			}
@@ -237,10 +242,14 @@ public class BlackjackApplication {
 			}
 			}
 		}
+		printPlayerHand();
+		printDealerHand();
 	}
 
 	// DETERMINE WINNER METHOD
 	public void determineWinner() {
+		playerHandValue();
+		dealerHandValue();
 		if ((player.getHandValue() > dealer.getHandValue() && player.getHandValue() < 22)
 				|| (player.getHandValue() < 22 && dealer.getHandValue() > 21)) {
 			System.out.println("Player wins!");
