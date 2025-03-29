@@ -50,29 +50,89 @@ public class BlackjackApplication {
 		}
 	}
 
+	public void userTrollBust() {
+		System.out.println("       .-\"\"\"\"-.");
+		System.out.println("      / -   -  \\");
+		System.out.println("     |  .-. .-. |");
+		System.out.println("     |  \\o| |o/ |");
+		System.out.println("      \\   ^    /");
+		System.out.println("       '.    .' ");
+		System.out.println("         '--'  ");
+		System.out.println();
+		System.out.println("Feaux Bust! Two Aces got you!");
+		System.out.println("     Troll Face Activated!");
+	}
+
+	public void dealerTrollBust() {
+		System.out.println("Dealer Feaux Bust!");
+        System.out.println();
+        System.out.println("         .-\"\"\"\"-.");
+        System.out.println("        / -   -  \\");
+        System.out.println("       |  O   O   |");
+        System.out.println("       |    ^     |");
+        System.out.println("        \\  '-'   /");
+        System.out.println("         '-....-'");
+        System.out.println("           /  \\");
+        System.out.println("      .---'----'---.");
+        System.out.println("     /  /|    |\\    \\");
+        System.out.println("    |  / |    | \\    |");
+        System.out.println("     \\_/  |____|  \\__/");
+        System.out.println();
+        System.out.println("You found the tooth fairy,");
+        System.out.println("   the only bug that pays!");
+	}
+	
+	public void dealerBlackjack() {
+		System.out.println("============================================");
+        System.out.println("|       DEALER GOT BLACKJACK!              |");
+        System.out.println("============================================");
+        System.out.println("The house wins with a natural Blackjack!");
+	}
+
+	public void chickenDinner() {
+		System.out.println("  ___________________________________________  ");
+		System.out.println(" /                                           \\ ");
+		System.out.println("|   WINNER WINNER CHICKEN DINNER!             |");
+		System.out.println(" \\___________________________________________/ ");
+		System.out.println("           \\   ^__^");
+		System.out.println("            \\  (oo)\\_______");
+		System.out.println("               (__)\\       )\\/\\");
+		System.out.println("                   ||----w |");
+		System.out.println("                   ||     ||");
+	}
+
 	public void checkStartingHands() {
-		if (player.getHandValue() == 21 && dealer.getHandValue() != 21) {
+		if (player.getHandValue() > 21) {
 			printPlayerHand();
-			System.out.println("WINNER WINNER CHICKEN DINNER!");
+			userTrollBust();
 			startingHandEndsGame = true;
-		} else if (player.getHandValue() != 21 && dealer.getHandValue() == 21) {
-			printPlayerHand();
+		} else if (dealer.getHandValue() > 21) {
 			printDealerHand();
-			System.out.println("Dealer Blackjack!");
-			startingHandEndsGame = true;
-		} else if (player.getHandValue() == 21 && dealer.getHandValue() == 21) {
-			printPlayerHand();
-			printDealerHand();
-			System.out.println("Dealer and Player both got Blackjack! Tie hand!");
-			startingHandEndsGame = true;
-		} else if (player.getHandValue() > 21) {
-			printPlayerHand();
-			System.out.println("You busted!");
-			System.out.println(
-					"...okay not really playing by the rules, but Aces only equal 11 here....sorry bout your luck.");
+			dealerTrollBust();
 			startingHandEndsGame = true;
 		} else {
-			startingHandEndsGame = false;
+
+			if (player.getHandValue() == 21 && dealer.getHandValue() != 21) {
+				printPlayerHand();
+				chickenDinner();
+				startingHandEndsGame = true;
+			} else if (player.getHandValue() != 21 && dealer.getHandValue() == 21) {
+				printPlayerHand();
+				printDealerHand();
+				dealerBlackjack();
+				startingHandEndsGame = true;
+			} else if (player.getHandValue() == 21 && dealer.getHandValue() == 21) {
+				printPlayerHand();
+				printDealerHand();
+				System.out.println("Dealer and Player both got Blackjack! Tie hand!");
+				startingHandEndsGame = true;
+			} else if (player.getHandValue() > 21) {
+				printPlayerHand();
+				userTrollBust();
+				startingHandEndsGame = true;
+			} else {
+				startingHandEndsGame = false;
+			}
 		}
 	}
 
@@ -80,12 +140,12 @@ public class BlackjackApplication {
 		System.out.print("Dealer Hand: ");
 		dealer.printHand();
 	}
-	
+
 	public void printPlayerHand() {
 		System.out.print("Player Hand: ");
 		player.printHand();
 	}
-	
+
 	public void dealerTurn() {
 		while (dealer.getHandValue() < 17) {
 			Card drawnCard = dealer.dealCard();
