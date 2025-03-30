@@ -3,6 +3,8 @@
 ## Overview
 This is a Blackjack app that allows the user to play a simplified version of Blackjack against the dealer. Betting, Splitting, and Soft Aces are not a part of this version of the game.
 
+
+
 ## Run the Program
 1. Running the program will deal a hand to both player and dealer
 2. If any starting hand wins, the program will announce it and deal a new hand
@@ -20,6 +22,10 @@ This is a Blackjack app that allows the user to play a simplified version of Bla
 - Polymorphism
 - Abstract methods
 - Inheritance
+
+ [UML Map](https://github.com/milesporter91/BlackjackProject/blob/main/Blackjack%20Project%20UML.pdf)
+---
+
 ## Lessons Learned
 1. *Figuring out how to print player/dealer hands without accessing their cards from outside their encapsulation took a bit of trial and error; Ultimately I ended up chaining methods from the player class down to the card class to retrieve the rank and suits of the hands, and using those chained methods to print the toString for the Card objects.*
 
