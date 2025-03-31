@@ -55,7 +55,6 @@ public class BlackjackApplication {
 	// STARTING HANDS METHODS
 
 	public void dealAndCheckHands() {
-//		dealFixedHands();
 		dealStartingHands();
 		checkStartingHands();
 	}
@@ -275,17 +274,5 @@ public class BlackjackApplication {
 			}
 		}
 	}
-
-//	public void dealFixedHands() {
-//		dealer.clearHand();
-//		player.clearHand();
-//		dealer.hit(new Card(Rank.ACE, Suit.CLUBS));
-//		dealer.hit(new Card(Rank.KING, Suit.CLUBS));
-//		player.hit(new Card(Rank.ACE, Suit.CLUBS));
-//		player.hit(new Card(Rank.FIVE, Suit.CLUBS));
-//		for (int i = 0; i < 42; i++) {
-//			dealer.dealCard();
-//		}
-//	}
 
 }
