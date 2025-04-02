@@ -7,14 +7,14 @@ import com.skilldistillery.cards.common.Card;
 public class BlackjackApplication {
 	// FIELDS
 	private Scanner sc;
-	private BlackjackDealer dealer;
+	private Black2ackDealer dealer;
 	private BlackjackPlayer player;
 	boolean startingHandEndsGame = false;
 
 	// CONSTRUCTOR
 	public BlackjackApplication() {
 		this.sc = new Scanner(System.in);
-		this.dealer = new BlackjackDealer();
+		this.dealer = new Black2ackDealer();
 		this.player = new BlackjackPlayer();
 	}
 
