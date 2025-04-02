@@ -3,13 +3,13 @@ package com.skilldistillery.cards.blackjack;
 import com.skilldistillery.cards.common.Card;
 import com.skilldistillery.cards.common.Deck;
 
-public class Black2ackDealer extends BlackjackPlayer{
+public class BlackjackDealer extends BlackjackPlayer{
 
 	//NO MORE FIELDS
 	//NO GETTER FOR THE DECK
 	private Deck deck;
 	
-	public Black2ackDealer() {
+	public BlackjackDealer() {
 		super();
 		deck = new Deck();
 	}
